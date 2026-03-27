@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>神聖抽牌 · Sacred Draw</title>
+<title>神聖抽牌 · Sacred Thoth Tarot Oracle</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+TC:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -16,11 +16,11 @@
     --bg2: #f3ece0;
     --ink: #3d2b0e;
     --ink-dim: #7a5c2a;
-    --red: #8b2020;
     --border: rgba(139,105,20,0.22);
+    --red: #8b2020;
   }
 
-- { margin:0; padding:0; box-sizing:border-box; }
+- { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
 background: #faf6f0 !important;
@@ -31,31 +31,30 @@ overflow-x: hidden;
 }
 
 body::before {
-content:’’;
-position:fixed; inset:0; z-index:0;
+content: ‘’;
+position: fixed; inset: 0; z-index: 0;
 background:
 radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139,105,20,0.07) 0%, transparent 60%),
 radial-gradient(ellipse 60% 40% at 20% 80%, rgba(139,32,32,0.04) 0%, transparent 50%);
-pointer-events:none;
+pointer-events: none;
 }
 
+/* ── Layout ── */
 .wrapper {
-position:relative; z-index:1;
+position: relative; z-index: 1;
 max-width: 860px;
 margin: 0 auto;
 padding: 48px 24px 80px;
 }
 
-header {
-text-align:center;
-margin-bottom: 56px;
-}
+/* ── Header ── */
+header { text-align: center; margin-bottom: 52px; }
 
 .header-ornament {
 color: var(–gold);
-font-size: 1.2rem;
+font-size: 1.1rem;
 letter-spacing: 0.5em;
-opacity: 0.7;
+opacity: 0.65;
 margin-bottom: 12px;
 }
 
@@ -70,7 +69,7 @@ margin-bottom: 6px;
 }
 
 header h2 {
-font-size: clamp(0.85rem, 2vw, 1rem);
+font-size: clamp(0.8rem, 2vw, 0.95rem);
 font-weight: 300;
 color: var(–ink-dim);
 letter-spacing: 0.3em;
@@ -78,28 +77,30 @@ text-transform: uppercase;
 }
 
 .divider {
-display:flex; align-items:center; gap:12px;
-margin: 20px auto; max-width:300px;
+display: flex; align-items: center; gap: 12px;
+margin: 18px auto; max-width: 280px;
 }
 .divider::before, .divider::after {
-content:’’; flex:1; height:1px;
-background: linear-gradient(90deg, transparent, var(–gold-dim));
+content: ‘’; flex: 1; height: 1px;
 }
-.divider::after { background: linear-gradient(90deg, var(–gold-dim), transparent); }
-.divider span { color:var(–gold); font-size:0.8rem; }
+.divider::before { background: linear-gradient(90deg, transparent, var(–gold-dim)); }
+.divider::after  { background: linear-gradient(90deg, var(–gold-dim), transparent); }
+.divider span { color: var(–gold); font-size: 0.8rem; }
 
+/* ── Tabs ── */
 .tabs {
-display:flex; gap:0;
+display: flex;
 border: 1px solid var(–border);
 border-radius: 4px;
 overflow: hidden;
-margin-bottom: 40px;
+margin-bottom: 36px;
 }
 
 .tab-btn {
-flex:1;
+flex: 1;
 background: transparent;
 border: none;
+border-right: 1px solid var(–border);
 color: var(–ink-dim);
 padding: 14px 20px;
 cursor: pointer;
@@ -107,40 +108,40 @@ font-family: ‘Noto Serif TC’, serif;
 font-size: 0.85rem;
 letter-spacing: 0.12em;
 transition: all 0.3s;
-border-right: 1px solid var(–border);
 position: relative;
 }
-.tab-btn:last-child { border-right:none; }
+.tab-btn:last-child { border-right: none; }
 .tab-btn.active {
 background: rgba(139,105,20,0.1);
 color: var(–gold-light);
 }
 .tab-btn::after {
-content:’’;
-position:absolute; bottom:0; left:0; right:0; height:2px;
+content: ‘’;
+position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
 background: var(–gold);
 transform: scaleX(0);
 transition: transform 0.3s;
 }
 .tab-btn.active::after { transform: scaleX(1); }
-
 .tab-en {
 display: block;
-font-size: 0.68rem;
+font-size: 0.66rem;
 letter-spacing: 0.15em;
-opacity: 0.6;
+opacity: 0.55;
 margin-top: 2px;
 font-family: ‘Cormorant Garamond’, serif;
 font-style: italic;
 }
 
-.panel { display:none; }
-.panel.active { display:block; }
+/* ── Panels ── */
+.panel { display: none; }
+.panel.active { display: block; }
 
+/* ── Mode toggle ── */
 .mode-toggle {
-display:flex; align-items:center; gap:16px;
-margin-bottom: 28px;
-padding: 14px 20px;
+display: flex; align-items: center; gap: 16px;
+margin-bottom: 24px;
+padding: 13px 18px;
 border: 1px solid var(–border);
 border-radius: 4px;
 background: rgba(139,105,20,0.04);
@@ -148,9 +149,9 @@ background: rgba(139,105,20,0.04);
 .mode-toggle label {
 font-size: 0.82rem;
 color: var(–ink-dim);
-letter-spacing: 0.1em;
+letter-spacing: 0.08em;
 }
-.toggle-group { display:flex; gap:8px; margin-left:auto; }
+.toggle-group { display: flex; gap: 8px; margin-left: auto; }
 
 .toggle-btn {
 background: transparent;
@@ -170,11 +171,27 @@ border-color: var(–gold-dim);
 color: var(–gold-light);
 }
 
+/* ── Zone grid ── */
+.select-all-btn {
+background: transparent;
+border: 1px solid var(–border);
+color: var(–ink-dim);
+padding: 7px 18px;
+cursor: pointer;
+font-family: ‘Noto Serif TC’, serif;
+font-size: 0.75rem;
+letter-spacing: 0.1em;
+border-radius: 2px;
+transition: all 0.25s;
+margin-bottom: 14px;
+}
+.select-all-btn:hover { border-color: var(–gold-dim); color: var(–ink); }
+
 .zones-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
 gap: 10px;
-margin-bottom: 32px;
+margin-bottom: 28px;
 }
 
 .zone-card {
@@ -184,211 +201,226 @@ padding: 14px 10px;
 text-align: center;
 cursor: pointer;
 transition: all 0.3s;
-background: rgba(250,246,240,0.8);
-position:relative; overflow:hidden;
+background: rgba(250,246,240,0.85);
+position: relative; overflow: hidden;
 }
 .zone-card::before {
-content:’’;
-position:absolute; inset:0;
+content: ‘’;
+position: absolute; inset: 0;
 background: radial-gradient(ellipse at 50% 0%, rgba(139,105,20,0.1), transparent 70%);
-opacity:0; transition: opacity 0.3s;
+opacity: 0; transition: opacity 0.3s;
 }
-.zone-card:hover::before, .zone-card.selected::before { opacity:1; }
+.zone-card:hover::before, .zone-card.selected::before { opacity: 1; }
 .zone-card:hover { border-color: var(–gold-dim); transform: translateY(-2px); }
 .zone-card.selected { border-color: var(–gold); background: rgba(139,105,20,0.08); }
 
-.zone-icon { font-size: 1.4rem; margin-bottom: 6px; display:block; }
-.zone-name { font-size: 0.85rem; color: #3d2b0e; letter-spacing: 0.08em; display:block; }
+.zone-icon  { font-size: 1.4rem; margin-bottom: 6px; display: block; }
+.zone-name  { font-size: 0.85rem; color: #3d2b0e; letter-spacing: 0.08em; display: block; }
 .zone-name-en {
-font-size: 0.65rem; color: var(–ink-dim); letter-spacing: 0.1em;
-font-style:italic; font-family:‘Cormorant Garamond’,serif; display:block; margin-top:2px;
+font-size: 0.63rem; color: var(–ink-dim); letter-spacing: 0.1em;
+font-style: italic; font-family: ‘Cormorant Garamond’, serif;
+display: block; margin-top: 2px;
 }
 
+/* ── Draw button ── */
 .draw-btn {
 width: 100%;
-padding: 16px;
-background: linear-gradient(135deg, rgba(139,105,20,0.12) 0%, rgba(139,105,20,0.06) 100%);
+padding: 15px;
+background: linear-gradient(135deg, rgba(139,105,20,0.12), rgba(139,105,20,0.06));
 border: 1px solid var(–gold-dim);
 color: var(–gold-light);
 font-family: ‘Cormorant Garamond’, serif;
 font-size: 1.1rem;
-font-weight: 400;
 letter-spacing: 0.2em;
 cursor: pointer;
 border-radius: 4px;
 transition: all 0.3s;
-margin-bottom: 40px;
+margin-bottom: 36px;
 }
 .draw-btn:hover {
-background: linear-gradient(135deg, rgba(139,105,20,0.22) 0%, rgba(139,105,20,0.12) 100%);
+background: linear-gradient(135deg, rgba(139,105,20,0.22), rgba(139,105,20,0.12));
 border-color: var(–gold);
-box-shadow: 0 0 20px rgba(139,105,20,0.12);
+box-shadow: 0 0 20px rgba(139,105,20,0.1);
 letter-spacing: 0.25em;
 }
-.draw-btn:disabled { opacity:0.35; cursor:not-allowed; }
-
+.draw-btn:disabled { opacity: 0.35; cursor: not-allowed; letter-spacing: 0.2em; }
 .btn-en {
-display:block; font-size:0.7rem; letter-spacing:0.25em;
-opacity:0.6; margin-top:3px; font-style:italic;
+display: block; font-size: 0.68rem; letter-spacing: 0.22em;
+opacity: 0.55; margin-top: 3px; font-style: italic;
 }
 
-.results-section { animation: fadeIn 0.6s ease; }
-
+/* ── Animations ── */
 @keyframes fadeIn {
-from { opacity:0; transform:translateY(16px); }
-to { opacity:1; transform:translateY(0); }
+from { opacity: 0; transform: translateY(14px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes cardReveal {
+from { opacity: 0; transform: translateY(18px) scale(0.95); }
+to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.result-zone-title { text-align:center; margin-bottom: 28px; }
+/* ── YCG Results ── */
+.results-section { animation: fadeIn 0.5s ease; }
+
+.result-zone-title { text-align: center; margin-bottom: 24px; }
 .result-zone-title h3 {
 font-family: ‘Cormorant Garamond’, serif;
-font-size: 1.4rem; color: var(–gold-light); font-weight:300; letter-spacing:0.15em;
+font-size: 1.35rem; color: var(–gold-light);
+font-weight: 300; letter-spacing: 0.15em;
 }
-.result-zone-title p { font-size: 0.72rem; color: var(–ink-dim); letter-spacing:0.2em; text-transform:uppercase; margin-top:4px; }
+.result-zone-title p {
+font-size: 0.7rem; color: var(–ink-dim);
+letter-spacing: 0.2em; text-transform: uppercase; margin-top: 4px;
+}
 
-.cards-row { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom: 24px; }
+.cards-row {
+display: flex; gap: 14px; justify-content: center;
+flex-wrap: wrap; margin-bottom: 20px;
+}
 
 .tarot-card {
-width: 160px;
+width: 155px;
 border: 1px solid var(–border);
 border-radius: 6px;
-overflow:hidden;
+overflow: hidden;
 background: var(–bg2);
 animation: cardReveal 0.5s ease backwards;
-text-align:center;
+text-align: center;
 }
 .tarot-card:nth-child(2) { animation-delay: 0.12s; }
 .tarot-card:nth-child(3) { animation-delay: 0.24s; }
 
-@keyframes cardReveal {
-from { opacity:0; transform:translateY(20px) scale(0.95); }
-to { opacity:1; transform:translateY(0) scale(1); }
-}
-
 .card-face {
-height: 220px;
-display:flex; flex-direction:column;
-align-items:center; justify-content:center;
-padding:16px;
+height: 210px;
+display: flex; flex-direction: column;
+align-items: center; justify-content: center;
+padding: 16px;
 background: linear-gradient(160deg, #ede3d0 0%, #e0d4bc 100%);
 border-bottom: 1px solid var(–border);
-position:relative;
+position: relative;
 }
 .card-face::before {
-content:’’; position:absolute; inset:6px;
-border: 1px solid rgba(139,105,20,0.2); border-radius:3px; pointer-events:none;
+content: ‘’; position: absolute; inset: 6px;
+border: 1px solid rgba(139,105,20,0.18); border-radius: 3px; pointer-events: none;
 }
 
-.card-number { font-family:‘Cormorant Garamond’,serif; font-size:0.75rem; color:var(–gold-dim); letter-spacing:0.2em; margin-bottom:10px; }
-.card-symbol { font-size:2.2rem; margin-bottom:10px; filter: drop-shadow(0 0 6px rgba(139,105,20,0.3)); }
-.card-title { font-family:‘Cormorant Garamond’,serif; font-size:0.95rem; color:var(–gold-light); letter-spacing:0.08em; line-height:1.3; font-style:italic; }
-.card-reversed { font-size:0.6rem; color:var(–red); letter-spacing:0.15em; text-transform:uppercase; margin-top:4px; }
-.card-info { padding:10px 12px; }
-.card-suit { font-size:0.65rem; color:var(–ink-dim); letter-spacing:0.12em; text-transform:uppercase; font-family:‘Cormorant Garamond’,serif; font-style:italic; }
-.card-position { font-size:0.72rem; color:var(–gold-dim); letter-spacing:0.1em; margin-top:2px; }
+.card-number {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 0.72rem; color: var(–gold-dim);
+letter-spacing: 0.2em; margin-bottom: 8px;
+}
+.card-symbol {
+font-size: 2rem; margin-bottom: 8px;
+filter: drop-shadow(0 0 6px rgba(139,105,20,0.25));
+}
+.card-title {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 0.92rem; color: var(–gold-light);
+letter-spacing: 0.06em; line-height: 1.3; font-style: italic;
+}
+.card-info { padding: 10px 12px; }
+.card-suit {
+font-size: 0.62rem; color: var(–ink-dim);
+letter-spacing: 0.1em; text-transform: uppercase;
+font-family: ‘Cormorant Garamond’, serif; font-style: italic;
+}
+.card-position {
+font-size: 0.7rem; color: var(–gold-dim);
+letter-spacing: 0.08em; margin-top: 2px;
+}
 
-.chakra-grid { display:flex; flex-direction:column; gap:10px; margin-bottom:32px; }
+/* ── Chakra Panel ── */
+.chakra-grid { display: flex; flex-direction: column; gap: 9px; margin-bottom: 28px; }
 
 .chakra-row {
-display:grid; grid-template-columns: 36px 1fr 80px;
-align-items:center; gap:14px; padding:12px 16px;
-border:1px solid var(–border); border-radius:4px;
-background: rgba(250,246,240,0.8);
+display: grid; grid-template-columns: 34px 1fr;
+align-items: center; gap: 12px; padding: 11px 16px;
+border: 1px solid var(–border); border-radius: 4px;
+background: rgba(250,246,240,0.85);
 }
-
 .chakra-dot {
-width:24px; height:24px; border-radius:50%;
-display:flex; align-items:center; justify-content:center;
-font-size:0.75rem; color:#fff; flex-shrink:0;
+width: 24px; height: 24px; border-radius: 50%;
+display: flex; align-items: center; justify-content: center;
+font-size: 0.72rem; color: #fff; flex-shrink: 0; font-weight: 600;
 }
-.chakra-zh { font-size:0.9rem; letter-spacing:0.08em; color: var(–ink); }
-.chakra-en { font-size:0.65rem; color:var(–ink-dim); font-family:‘Cormorant Garamond’,serif; font-style:italic; letter-spacing:0.12em; }
-.chakra-card-slot { font-size:0.7rem; color:var(–ink-dim); text-align:right; letter-spacing:0.05em; font-style:italic; }
+.chakra-zh { font-size: 0.88rem; color: var(–ink); letter-spacing: 0.06em; }
+.chakra-en {
+font-size: 0.63rem; color: var(–ink-dim);
+font-family: ‘Cormorant Garamond’, serif; font-style: italic; letter-spacing: 0.1em;
+}
 
-.chakra-results { display:flex; flex-direction:column; gap:14px; animation:fadeIn 0.5s ease; }
+.chakra-results { display: flex; flex-direction: column; gap: 12px; animation: fadeIn 0.5s ease; }
 
 .chakra-result-row {
-display:grid; grid-template-columns: 160px 1fr; gap:16px;
-align-items:start; padding:16px;
-border:1px solid var(–border); border-radius:4px;
-background: rgba(250,246,240,0.8);
-animation:fadeIn 0.5s ease backwards;
+display: grid; grid-template-columns: 1fr 1fr;
+gap: 12px; align-items: center; padding: 14px 16px;
+border: 1px solid var(–border); border-radius: 4px;
+background: rgba(250,246,240,0.85);
+animation: fadeIn 0.5s ease backwards;
 }
-.chakra-result-row:nth-child(2) { animation-delay:0.07s; }
-.chakra-result-row:nth-child(3) { animation-delay:0.14s; }
-.chakra-result-row:nth-child(4) { animation-delay:0.21s; }
-.chakra-result-row:nth-child(5) { animation-delay:0.28s; }
-.chakra-result-row:nth-child(6) { animation-delay:0.35s; }
-.chakra-result-row:nth-child(7) { animation-delay:0.42s; }
+.chakra-result-row:nth-child(2) { animation-delay: 0.07s; }
+.chakra-result-row:nth-child(3) { animation-delay: 0.14s; }
+.chakra-result-row:nth-child(4) { animation-delay: 0.21s; }
+.chakra-result-row:nth-child(5) { animation-delay: 0.28s; }
+.chakra-result-row:nth-child(6) { animation-delay: 0.35s; }
+.chakra-result-row:nth-child(7) { animation-delay: 0.42s; }
 
-.chakra-label { display:flex; align-items:center; gap:10px; }
-.chakra-label-text .zh { font-size:0.9rem; color: var(–ink); }
-.chakra-label-text .en { font-size:0.65rem; color:var(–ink-dim); font-family:‘Cormorant Garamond’,serif; font-style:italic; }
-
-.chakra-card-name { font-family:‘Cormorant Garamond’,serif; font-size:1rem; color:var(–gold-light); font-style:italic; letter-spacing:0.06em; }
-.chakra-card-sub { font-size:0.68rem; color:var(–ink-dim); letter-spacing:0.1em; margin-top:3px; }
-.chakra-reversed { font-size:0.62rem; color:var(–red); letter-spacing:0.12em; margin-left:6px; }
-
-.reset-btn {
-background:transparent; border:1px solid rgba(139,105,20,0.25); color:var(–ink-dim);
-padding:8px 24px; cursor:pointer; font-family:‘Cormorant Garamond’,serif;
-font-size:0.85rem; letter-spacing:0.15em; border-radius:2px; transition:all 0.25s;
-display:block; margin:24px auto 0;
+.chakra-label { display: flex; align-items: center; gap: 10px; }
+.chakra-label-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.chakra-label-text .zh { font-size: 0.88rem; color: var(–ink); }
+.chakra-label-text .en {
+font-size: 0.62rem; color: var(–ink-dim);
+font-family: ‘Cormorant Garamond’, serif; font-style: italic;
 }
-.reset-btn:hover { border-color:var(–gold-dim); color:var(–ink); }
-
-.select-all-btn {
-background:transparent; border:1px solid var(–border); color:var(–ink-dim);
-padding:8px 20px; cursor:pointer; font-family:‘Noto Serif TC’,serif;
-font-size:0.75rem; letter-spacing:0.12em; border-radius:2px; transition:all 0.25s; margin-bottom:16px;
+.chakra-card-name {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1rem; color: var(–gold-light);
+font-style: italic; letter-spacing: 0.06em;
 }
-.select-all-btn:hover { border-color:var(–gold-dim); color:var(–ink); }
+.chakra-card-sub {
+font-size: 0.65rem; color: var(–ink-dim);
+letter-spacing: 0.08em; margin-top: 2px;
+}
 
+/* ── Summary ── */
 .summary-btn {
-background: linear-gradient(135deg, rgba(139,105,20,0.15), rgba(139,105,20,0.08));
+background: linear-gradient(135deg, rgba(139,105,20,0.14), rgba(139,105,20,0.07));
 border: 1px solid var(–gold-dim);
 color: var(–gold-light);
-padding: 12px 32px;
+padding: 11px 30px;
 cursor: pointer;
 font-family: ‘Noto Serif TC’, serif;
-font-size: 0.9rem;
-letter-spacing: 0.15em;
+font-size: 0.88rem;
+letter-spacing: 0.14em;
 border-radius: 4px;
 transition: all 0.25s;
 }
 .summary-btn:hover {
-background: linear-gradient(135deg, rgba(139,105,20,0.25), rgba(139,105,20,0.15));
+background: linear-gradient(135deg, rgba(139,105,20,0.24), rgba(139,105,20,0.14));
 border-color: var(–gold);
+box-shadow: 0 0 16px rgba(139,105,20,0.1);
 }
 
 .summary-box {
 margin: 16px 0 8px;
 border: 1px solid var(–border);
 border-radius: 6px;
-padding: 20px 24px;
+padding: 20px 22px;
 background: rgba(139,105,20,0.04);
 animation: fadeIn 0.4s ease;
 }
-
 .summary-title {
 font-family: ‘Cormorant Garamond’, serif;
-font-size: 1rem;
-color: var(–gold-light);
-letter-spacing: 0.15em;
+font-size: 1rem; color: var(–gold-light);
+letter-spacing: 0.15em; font-style: italic;
 margin-bottom: 14px;
-font-style: italic;
 }
-
 .summary-text {
 font-family: ‘Noto Serif TC’, serif;
-font-size: 0.9rem;
-color: var(–ink);
-line-height: 2;
-letter-spacing: 0.05em;
-white-space: pre-wrap;
-margin-bottom: 16px;
+font-size: 0.9rem; color: var(–ink);
+line-height: 2.1; letter-spacing: 0.04em;
+white-space: pre-wrap; margin-bottom: 16px;
 }
-
 .copy-btn {
 background: transparent;
 border: 1px solid var(–border);
@@ -403,11 +435,30 @@ transition: all 0.2s;
 }
 .copy-btn:hover { border-color: var(–gold-dim); color: var(–ink); }
 
-@media(max-width:540px){
-.zones-grid { grid-template-columns: repeat(3,1fr); }
-.chakra-result-row { grid-template-columns:1fr; gap:6px; }
-.tarot-card { width:140px; }
-.card-face { height:190px; }
+/* ── Reset / shared ── */
+.reset-btn {
+background: transparent;
+border: 1px solid rgba(139,105,20,0.2);
+color: var(–ink-dim);
+padding: 8px 24px;
+cursor: pointer;
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 0.85rem;
+letter-spacing: 0.14em;
+border-radius: 2px;
+transition: all 0.25s;
+display: block; margin: 20px auto 0;
+}
+.reset-btn:hover { border-color: var(–gold-dim); color: var(–ink); }
+
+/* ── Mobile ── */
+@media (max-width: 540px) {
+.zones-grid { grid-template-columns: repeat(3, 1fr); }
+.chakra-result-row { grid-template-columns: 1fr; }
+.tarot-card { width: 138px; }
+.card-face { height: 185px; }
+.mode-toggle { flex-wrap: wrap; gap: 10px; }
+.toggle-group { margin-left: 0; }
 }
 </style>
 
@@ -415,12 +466,16 @@ transition: all 0.2s;
 <body>
 <div class="wrapper">
 
+  <!-- Header -->
+
   <header>
     <div class="header-ornament">✦ ✦ ✦</div>
     <h1>神聖抽牌</h1>
     <h2>Sacred Thoth Tarot Oracle</h2>
     <div class="divider"><span>☽</span></div>
   </header>
+
+  <!-- Tabs -->
 
   <div class="tabs">
     <button class="tab-btn active" onclick="switchTab('ycg')">
@@ -433,132 +488,176 @@ transition: all 0.2s;
     </button>
   </div>
 
+  <!-- Panel: Yuan Chen Gong -->
+
   <div class="panel active" id="panel-ycg">
-    <div class="mode-toggle">
-      <label>每區域抽牌數 · Cards per Zone</label>
-      <div class="toggle-group">
-        <button class="toggle-btn active" id="mode1" onclick="setMode(1)">1 張</button>
-        <button class="toggle-btn" id="mode3" onclick="setMode(3)">3 張</button>
-      </div>
-    </div>
-    <button class="select-all-btn" onclick="toggleAllZones()">全選 / 全清 · Select All / Clear</button>
-    <div class="zones-grid" id="zones-grid"></div>
-    <button class="draw-btn" id="ycg-draw-btn" onclick="drawYCG()" disabled>
-      抽取能量牌
-      <span class="btn-en">Draw Sacred Cards</span>
-    </button>
-    <div id="ycg-results"></div>
-  </div>
 
-  <div class="panel" id="panel-chakra">
-    <div class="chakra-grid" id="chakra-preview"></div>
-    <button class="draw-btn" onclick="drawChakra()">
-      抽取脈輪能量牌
-      <span class="btn-en">Draw Chakra Energy</span>
-    </button>
-    <div id="chakra-results"></div>
+```
+<div class="mode-toggle">
+  <label>每區域抽牌數 · Cards per Zone</label>
+  <div class="toggle-group">
+    <button class="toggle-btn active" id="mode1" onclick="setMode(1)">1 張</button>
+    <button class="toggle-btn"        id="mode3" onclick="setMode(3)">3 張</button>
   </div>
-
 </div>
 
+<button class="select-all-btn" onclick="toggleAllZones()">全選 / 全清 · Select All / Clear</button>
+
+<div class="zones-grid" id="zones-grid"></div>
+
+<button class="draw-btn" id="ycg-draw-btn" onclick="drawYCG()" disabled>
+  抽取能量牌
+  <span class="btn-en">Draw Sacred Cards</span>
+</button>
+
+<div id="ycg-results"></div>
+```
+
+  </div>
+
+  <!-- Panel: Chakra -->
+
+  <div class="panel" id="panel-chakra">
+
+```
+<div class="chakra-grid" id="chakra-preview"></div>
+
+<button class="draw-btn" onclick="drawChakra()">
+  抽取脈輪能量牌
+  <span class="btn-en">Draw Chakra Energy</span>
+</button>
+
+<div id="chakra-results"></div>
+```
+
+  </div>
+
+</div><!-- /.wrapper -->
+
 <script>
+// ═══════════════════════════════════════════
+//  托特塔羅牌組 Thoth Tarot Deck (78 cards)
+// ═══════════════════════════════════════════
 const MAJOR = [
-  {n:'0',zh:'愚者',en:'The Fool',sym:'🌬️'},
-  {n:'I',zh:'魔法師',en:'The Magus',sym:'☿'},
-  {n:'II',zh:'女祭司',en:'The Priestess',sym:'🌙'},
-  {n:'III',zh:'女皇',en:'The Empress',sym:'♀'},
-  {n:'IV',zh:'皇帝',en:'The Emperor',sym:'♈'},
-  {n:'V',zh:'教皇',en:'The Hierophant',sym:'♉'},
-  {n:'VI',zh:'戀人',en:'The Lovers',sym:'♊'},
-  {n:'VII',zh:'戰車',en:'The Chariot',sym:'♋'},
-  {n:'VIII',zh:'力量（調整）',en:'Adjustment',sym:'♎'},
-  {n:'IX',zh:'隱者',en:'The Hermit',sym:'♍'},
-  {n:'X',zh:'命運之輪',en:'Wheel of Fortune',sym:'♃'},
-  {n:'XI',zh:'慾望',en:'Lust',sym:'♌'},
-  {n:'XII',zh:'吊人',en:'The Hanged Man',sym:'💧'},
-  {n:'XIII',zh:'死神',en:'Death',sym:'♏'},
-  {n:'XIV',zh:'藝術',en:'Art',sym:'♐'},
-  {n:'XV',zh:'惡魔',en:'The Devil',sym:'♑'},
-  {n:'XVI',zh:'塔',en:'The Tower',sym:'♂'},
-  {n:'XVII',zh:'星星',en:'The Star',sym:'♒'},
-  {n:'XVIII',zh:'月亮',en:'The Moon',sym:'♓'},
-  {n:'XIX',zh:'太陽',en:'The Sun',sym:'☉'},
-  {n:'XX',zh:'永恆之火',en:'The Aeon',sym:'🔥'},
-  {n:'XXI',zh:'宇宙',en:'The Universe',sym:'♄'},
+  {n:'0',   zh:'愚者',       en:'The Fool',         sym:'🌬️'},
+  {n:'I',   zh:'魔法師',     en:'The Magus',         sym:'☿'},
+  {n:'II',  zh:'女祭司',     en:'The Priestess',     sym:'🌙'},
+  {n:'III', zh:'女皇',       en:'The Empress',       sym:'♀'},
+  {n:'IV',  zh:'皇帝',       en:'The Emperor',       sym:'♈'},
+  {n:'V',   zh:'教皇',       en:'The Hierophant',    sym:'♉'},
+  {n:'VI',  zh:'戀人',       en:'The Lovers',        sym:'♊'},
+  {n:'VII', zh:'戰車',       en:'The Chariot',       sym:'♋'},
+  {n:'VIII',zh:'力量（調整）',en:'Adjustment',        sym:'♎'},
+  {n:'IX',  zh:'隱者',       en:'The Hermit',        sym:'♍'},
+  {n:'X',   zh:'命運之輪',   en:'Wheel of Fortune',  sym:'♃'},
+  {n:'XI',  zh:'慾望',       en:'Lust',              sym:'♌'},
+  {n:'XII', zh:'吊人',       en:'The Hanged Man',    sym:'💧'},
+  {n:'XIII',zh:'死神',       en:'Death',             sym:'♏'},
+  {n:'XIV', zh:'藝術',       en:'Art',               sym:'♐'},
+  {n:'XV',  zh:'惡魔',       en:'The Devil',         sym:'♑'},
+  {n:'XVI', zh:'塔',         en:'The Tower',         sym:'♂'},
+  {n:'XVII',zh:'星星',       en:'The Star',          sym:'♒'},
+  {n:'XVIII',zh:'月亮',      en:'The Moon',          sym:'♓'},
+  {n:'XIX', zh:'太陽',       en:'The Sun',           sym:'☉'},
+  {n:'XX',  zh:'永恆之火',   en:'The Aeon',          sym:'🔥'},
+  {n:'XXI', zh:'宇宙',       en:'The Universe',      sym:'♄'},
 ];
 
 const SUITS = [
-  {suit:'權杖',suitEn:'Wands',sym:'🔥'},
-  {suit:'聖杯',suitEn:'Cups',sym:'💧'},
-  {suit:'寶劍',suitEn:'Swords',sym:'⚡'},
-  {suit:'圓盤',suitEn:'Disks',sym:'🌍'},
+  {suit:'權杖', suitEn:'Wands',  sym:'🔥'},
+  {suit:'聖杯', suitEn:'Cups',   sym:'💧'},
+  {suit:'寶劍', suitEn:'Swords', sym:'⚡'},
+  {suit:'圓盤', suitEn:'Disks',  sym:'🌍'},
 ];
 
 const MINOR = [];
 const COURT = ['騎士 Knight','王后 Queen','王子 Prince','公主 Princess'];
-for(const s of SUITS){
-  for(let i=1;i<=10;i++){
-    MINOR.push({n:`${i}`,zh:`${s.suit}${i===1?'首牌':i+'號'}`,en:`${i===1?'Ace':i} of ${s.suitEn}`,sym:s.sym,suit:s.suit,suitEn:s.suitEn});
+for (const s of SUITS) {
+  for (let i = 1; i <= 10; i++) {
+    MINOR.push({
+      n: String(i),
+      zh: `${s.suit}${i === 1 ? '首牌' : i + '號'}`,
+      en: `${i === 1 ? 'Ace' : i} of ${s.suitEn}`,
+      sym: s.sym, suit: s.suit, suitEn: s.suitEn
+    });
   }
-  for(const c of COURT){
-    const [zh,en]=c.split(' ');
-    MINOR.push({n:en[0],zh:`${s.suit}${zh}`,en:`${en} of ${s.suitEn}`,sym:s.sym,suit:s.suit,suitEn:s.suitEn});
+  for (const c of COURT) {
+    const [zh, en] = c.split(' ');
+    MINOR.push({
+      n: en[0],
+      zh: `${s.suit}${zh}`,
+      en: `${en} of ${s.suitEn}`,
+      sym: s.sym, suit: s.suit, suitEn: s.suitEn
+    });
   }
 }
 
-const DECK = [...MAJOR,...MINOR];
+const DECK = [...MAJOR, ...MINOR]; // 78 張
 
+// ═══════════════════════════════════════════
+//  元辰宮區域
+// ═══════════════════════════════════════════
 const ZONES = [
-  {zh:'天空',en:'Sky',icon:'🌌'},
-  {zh:'僕人',en:'Servants',icon:'🤝'},
-  {zh:'土地',en:'Land',icon:'🌿'},
-  {zh:'生命之樹',en:'Tree of Life',icon:'🌳'},
-  {zh:'水缸',en:'Water Vessel',icon:'🪣'},
-  {zh:'米缸',en:'Rice Vessel',icon:'🌾'},
-  {zh:'廚房',en:'Kitchen',icon:'🍳'},
-  {zh:'臥室',en:'Bedroom',icon:'🌙'},
-  {zh:'客廳',en:'Living Room',icon:'🏮'},
-  {zh:'大門',en:'Main Gate',icon:'🚪'},
-  {zh:'書房',en:'Study',icon:'📚'},
-  {zh:'外部',en:'Exterior',icon:'🏔️'},
+  {zh:'天空',    en:'Sky',          icon:'🌌'},
+  {zh:'僕人',    en:'Servants',     icon:'🤝'},
+  {zh:'土地',    en:'Land',         icon:'🌿'},
+  {zh:'生命之樹',en:'Tree of Life', icon:'🌳'},
+  {zh:'水缸',    en:'Water Vessel', icon:'🪣'},
+  {zh:'米缸',    en:'Rice Vessel',  icon:'🌾'},
+  {zh:'廚房',    en:'Kitchen',      icon:'🍳'},
+  {zh:'臥室',    en:'Bedroom',      icon:'🌙'},
+  {zh:'客廳',    en:'Living Room',  icon:'🏮'},
+  {zh:'大門',    en:'Main Gate',    icon:'🚪'},
+  {zh:'書房',    en:'Study',        icon:'📚'},
+  {zh:'外部',    en:'Exterior',     icon:'🏔️'},
 ];
 
+// ═══════════════════════════════════════════
+//  脈輪
+// ═══════════════════════════════════════════
 const CHAKRAS = [
-  {zh:'海底輪',en:'Root · Muladhara',color:'#c0392b'},
-  {zh:'臍輪',en:'Sacral · Svadhisthana',color:'#e67e22'},
-  {zh:'太陽神經叢',en:'Solar · Manipura',color:'#d4a017'},
-  {zh:'心輪',en:'Heart · Anahata',color:'#27ae60'},
-  {zh:'喉輪',en:'Throat · Vishuddha',color:'#2980b9'},
-  {zh:'眉心輪',en:'Third Eye · Ajna',color:'#8e44ad'},
-  {zh:'頂輪',en:'Crown · Sahasrara',color:'#9b7ec8'},
+  {zh:'海底輪',    en:'Root · Muladhara',       color:'#c0392b'},
+  {zh:'臍輪',      en:'Sacral · Svadhisthana',  color:'#e67e22'},
+  {zh:'太陽神經叢',en:'Solar · Manipura',        color:'#d4a017'},
+  {zh:'心輪',      en:'Heart · Anahata',         color:'#27ae60'},
+  {zh:'喉輪',      en:'Throat · Vishuddha',      color:'#2980b9'},
+  {zh:'眉心輪',    en:'Third Eye · Ajna',        color:'#8e44ad'},
+  {zh:'頂輪',      en:'Crown · Sahasrara',       color:'#9b7ec8'},
 ];
 
-let cardMode = 1;
+// ═══════════════════════════════════════════
+//  State
+// ═══════════════════════════════════════════
+let cardMode      = 1;
 let selectedZones = new Set();
+let _ycgSummary   = [];
+let _chakraSummary = [];
 
-function drawRandom(n=1){
-  const shuffled = [...DECK].sort(()=>Math.random()-0.5);
-  return shuffled.slice(0,n).map(c=>({...c}));
+// ── Helpers ──────────────────────────────
+function drawRandom(n = 1) {
+  return [...DECK].sort(() => Math.random() - 0.5).slice(0, n).map(c => ({...c}));
 }
 
-function switchTab(id){
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
-    b.classList.toggle('active', ['ycg','chakra'][i]===id);
+// ── Tabs ─────────────────────────────────
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach((b, i) => {
+    b.classList.toggle('active', ['ycg', 'chakra'][i] === id);
   });
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById('panel-'+id).classList.add('active');
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
 }
 
-function setMode(n){
+// ── Mode ─────────────────────────────────
+function setMode(n) {
   cardMode = n;
-  document.getElementById('mode1').classList.toggle('active',n===1);
-  document.getElementById('mode3').classList.toggle('active',n===3);
+  document.getElementById('mode1').classList.toggle('active', n === 1);
+  document.getElementById('mode3').classList.toggle('active', n === 3);
 }
 
-function renderZones(){
-  const grid = document.getElementById('zones-grid');
-  grid.innerHTML = ZONES.map((z,i)=>`
-    <div class="zone-card ${selectedZones.has(i)?'selected':''}" onclick="toggleZone(${i})">
+// ── Zone grid ────────────────────────────
+function renderZones() {
+  document.getElementById('zones-grid').innerHTML = ZONES.map((z, i) => `
+    <div class="zone-card ${selectedZones.has(i) ? 'selected' : ''}" onclick="toggleZone(${i})">
       <span class="zone-icon">${z.icon}</span>
       <span class="zone-name">${z.zh}</span>
       <span class="zone-name-en">${z.en}</span>
@@ -566,133 +665,140 @@ function renderZones(){
   `).join('');
 }
 
-function toggleZone(i){
-  if(selectedZones.has(i)) selectedZones.delete(i);
-  else selectedZones.add(i);
+function toggleZone(i) {
+  selectedZones.has(i) ? selectedZones.delete(i) : selectedZones.add(i);
   renderZones();
-  document.getElementById('ycg-draw-btn').disabled = selectedZones.size===0;
+  document.getElementById('ycg-draw-btn').disabled = selectedZones.size === 0;
 }
 
-function toggleAllZones(){
-  if(selectedZones.size===ZONES.length) selectedZones.clear();
-  else ZONES.forEach((_,i)=>selectedZones.add(i));
+function toggleAllZones() {
+  if (selectedZones.size === ZONES.length) selectedZones.clear();
+  else ZONES.forEach((_, i) => selectedZones.add(i));
   renderZones();
-  document.getElementById('ycg-draw-btn').disabled = selectedZones.size===0;
+  document.getElementById('ycg-draw-btn').disabled = selectedZones.size === 0;
 }
 
-let _ycgSummary = [];
-
-function drawYCG(){
-  const positions = cardMode===3 ? ['過去 Past','現在 Present','未來 Future'] : ['能量 Energy'];
+// ── Draw YCG ─────────────────────────────
+function drawYCG() {
+  const pos = cardMode === 3 ? ['過去 Past', '現在 Present', '未來 Future'] : ['能量 Energy'];
   const container = document.getElementById('ycg-results');
-  const sortedZones = [...selectedZones].sort((a,b)=>a-b);
+  const sortedZones = [...selectedZones].sort((a, b) => a - b);
   _ycgSummary = [];
   let html = '';
-  for(const zi of sortedZones){
+
+  for (const zi of sortedZones) {
     const z = ZONES[zi];
     const cards = drawRandom(cardMode);
     _ycgSummary.push({z, cards});
     html += `
-      <div class="results-section" style="margin-bottom:36px;">
+      <div class="results-section" style="margin-bottom:32px;">
         <div class="result-zone-title">
           <h3>${z.icon} ${z.zh}</h3>
           <p>${z.en}</p>
         </div>
         <div class="cards-row">
-          ${cards.map((c,i)=>`
+          ${cards.map((c, i) => `
             <div class="tarot-card">
               <div class="card-face">
                 <div class="card-number">${c.n}</div>
                 <div class="card-symbol">${c.sym}</div>
                 <div class="card-title">${c.zh}</div>
-                <div class="card-title" style="font-size:0.72rem;opacity:0.6;">${c.en}</div>
+                <div class="card-title" style="font-size:0.7rem;opacity:0.55;">${c.en}</div>
               </div>
               <div class="card-info">
-                <div class="card-suit">${c.suit?c.suit+' · '+c.suitEn:'Major Arcana · 大阿爾克那'}</div>
-                ${cardMode===3?`<div class="card-position">${positions[i]}</div>`:''}
+                <div class="card-suit">${c.suit ? c.suit + ' · ' + c.suitEn : 'Major Arcana · 大阿爾克那'}</div>
+                ${cardMode === 3 ? `<div class="card-position">${pos[i]}</div>` : ''}
               </div>
             </div>
           `).join('')}
         </div>
       </div>`;
   }
+
   html += `
-    <div style="text-align:center; margin-bottom:16px;">
+    <div style="text-align:center; margin-bottom:14px;">
       <button class="summary-btn" onclick="showYCGSummary()">📋 一鍵產生文字總覽</button>
     </div>
     <div id="ycg-summary-output"></div>
     <button class="reset-btn" onclick="resetYCG()">重新抽牌 · Draw Again</button>
   `;
   container.innerHTML = html;
-  container.scrollIntoView({behavior:'smooth',block:'start'});
+  container.scrollIntoView({behavior: 'smooth', block: 'start'});
 }
 
-function showYCGSummary(){
-  const positions = cardMode===3 ? ['過去','現在','未來'] : null;
-  const lines = _ycgSummary.map(({z, cards})=>{
-    if(cardMode===3){
-      return cards.map((c,i)=>`${z.icon} ${z.zh}（${positions[i]}）：${c.zh}`).join('\n');
-    }
+function showYCGSummary() {
+  const pos = cardMode === 3 ? ['過去', '現在', '未來'] : null;
+  const lines = _ycgSummary.map(({z, cards}) => {
+    if (cardMode === 3) return cards.map((c, i) => `${z.icon} ${z.zh}（${pos[i]}）：${c.zh}`).join('\n');
     return `${z.icon} ${z.zh}：${cards[0].zh}`;
   }).join('\n');
 
-  const out = document.getElementById('ycg-summary-output');
-  out.innerHTML = `
+  const escaped = lines.replace(/\\/g,'\\\\').replace(/`/g,'\\`');
+  document.getElementById('ycg-summary-output').innerHTML = `
     <div class="summary-box">
       <div class="summary-title">✨ 元辰宮能量總覽</div>
       <pre class="summary-text">${lines}</pre>
 
 ```
-  <button class="copy-btn" onclick="copyText(this, \`${lines.replace(/`/g,'\\`')}\`)">📋 複製文字</button>
+  <button class="copy-btn" onclick="copyText(this, \`${escaped}\`)">📋 複製文字</button>
 </div>
 ```
 
 `;
-out.scrollIntoView({behavior:‘smooth’,block:‘start’});
+document.getElementById(‘ycg-summary-output’).scrollIntoView({behavior: ‘smooth’, block: ‘start’});
 }
 
-function resetYCG(){ document.getElementById(‘ycg-results’).innerHTML = ‘’; _ycgSummary=[]; }
-
-function renderChakraPreview(){
-const el = document.getElementById(‘chakra-preview’);
-el.innerHTML = CHAKRAS.map((c,i)=>`<div class="chakra-row"> <div class="chakra-dot" style="background:${c.color}; box-shadow:0 0 10px ${c.color}66;">${i+1}</div> <div> <div class="chakra-zh">${c.zh}</div> <div class="chakra-en">${c.en}</div> </div> <div class="chakra-card-slot">—</div> </div>`).join(’’);
+function resetYCG() {
+document.getElementById(‘ycg-results’).innerHTML = ‘’;
+_ycgSummary = [];
 }
 
-let _chakraSummary = [];
+// ── Chakra preview ───────────────────────
+function renderChakraPreview() {
+document.getElementById(‘chakra-preview’).innerHTML = CHAKRAS.map((c, i) => `<div class="chakra-row"> <div class="chakra-dot" style="background:${c.color}; box-shadow:0 0 10px ${c.color}66;">${i + 1}</div> <div> <div class="chakra-zh">${c.zh}</div> <div class="chakra-en">${c.en}</div> </div> </div>`).join(’’);
+}
 
-function drawChakra(){
+// ── Draw Chakra ──────────────────────────
+function drawChakra() {
 const cards = drawRandom(CHAKRAS.length);
-_chakraSummary = CHAKRAS.map((ch,i)=>({ch, c:cards[i]}));
+_chakraSummary = CHAKRAS.map((ch, i) => ({ch, c: cards[i]}));
 const container = document.getElementById(‘chakra-results’);
 let html = ‘<div class="chakra-results">’;
-CHAKRAS.forEach((ch,i)=>{
+
+CHAKRAS.forEach((ch, i) => {
 const c = cards[i];
-html += ` <div class="chakra-result-row"> <div class="chakra-label"> <div style="background:${ch.color}; box-shadow:0 0 8px ${ch.color}66; width:10px;height:10px;border-radius:50%;flex-shrink:0;"></div> <div class="chakra-label-text"> <div class="zh">${ch.zh}</div> <div class="en">${ch.en}</div> </div> </div> <div> <div class="chakra-card-name">${c.sym} ${c.zh}</div> <div class="chakra-card-sub">${c.en} · ${c.suit?c.suit+' '+c.suitEn:'Major Arcana'}</div> </div> </div>`;
+html += ` <div class="chakra-result-row"> <div class="chakra-label"> <div class="chakra-label-dot" style="background:${ch.color}; box-shadow:0 0 7px ${ch.color}66;"></div> <div class="chakra-label-text"> <div class="zh">${ch.zh}</div> <div class="en">${ch.en}</div> </div> </div> <div> <div class="chakra-card-name">${c.sym} ${c.zh}</div> <div class="chakra-card-sub">${c.en} · ${c.suit ? c.suit + ' ' + c.suitEn : 'Major Arcana'}</div> </div> </div>`;
 });
+
 html += ‘</div>’;
-html += `<div style="text-align:center; margin:16px 0;"> <button class="summary-btn" onclick="showChakraSummary()">📋 一鍵產生文字總覽</button> </div> <div id="chakra-summary-output"></div> <button class="reset-btn" onclick="resetChakra()">重新抽牌 · Draw Again</button>`;
+html += `<div style="text-align:center; margin:14px 0;"> <button class="summary-btn" onclick="showChakraSummary()">📋 一鍵產生文字總覽</button> </div> <div id="chakra-summary-output"></div> <button class="reset-btn" onclick="resetChakra()">重新抽牌 · Draw Again</button>`;
 container.innerHTML = html;
-container.scrollIntoView({behavior:‘smooth’,block:‘start’});
+container.scrollIntoView({behavior: ‘smooth’, block: ‘start’});
 }
 
-function showChakraSummary(){
-const lines = _chakraSummary.map(({ch,c})=>`${c.sym} ${ch.zh}：${c.zh}`).join(’\n’);
-const out = document.getElementById(‘chakra-summary-output’);
-out.innerHTML = ` <div class="summary-box"> <div class="summary-title">✨ 脈輪能量總覽</div> <pre class="summary-text">${lines}</pre> <button class="copy-btn" onclick="copyText(this, \`${lines.replace(/`/g,'\\`’)}`)”>📋 複製文字</button>
+function showChakraSummary() {
+const lines = _chakraSummary.map(({ch, c}) => `${c.sym} ${ch.zh}：${c.zh}`).join(’\n’);
+const escaped = lines.replace(/\/g,’\\’).replace(/`/g,'\\`’);
+document.getElementById(‘chakra-summary-output’).innerHTML = ` <div class="summary-box"> <div class="summary-title">✨ 脈輪能量總覽</div> <pre class="summary-text">${lines}</pre> <button class="copy-btn" onclick="copyText(this, \`${escaped}`)”>📋 複製文字</button>
 </div>
 `;
-out.scrollIntoView({behavior:‘smooth’,block:‘start’});
+document.getElementById(‘chakra-summary-output’).scrollIntoView({behavior: ‘smooth’, block: ‘start’});
 }
 
-function resetChakra(){ document.getElementById(‘chakra-results’).innerHTML = ‘’; _chakraSummary=[]; }
+function resetChakra() {
+document.getElementById(‘chakra-results’).innerHTML = ‘’;
+_chakraSummary = [];
+}
 
-function copyText(btn, text){
-navigator.clipboard.writeText(text).then(()=>{
+// ── Copy ─────────────────────────────────
+function copyText(btn, text) {
+navigator.clipboard.writeText(text).then(() => {
 btn.textContent = ‘✅ 已複製！’;
-setTimeout(()=>{ btn.textContent = ‘📋 複製文字’; }, 2000);
+setTimeout(() => { btn.textContent = ‘📋 複製文字’; }, 2000);
 });
 }
 
+// ── Init ─────────────────────────────────
 renderZones();
 renderChakraPreview();
 </script>
